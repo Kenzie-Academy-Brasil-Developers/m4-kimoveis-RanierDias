@@ -1,7 +1,4 @@
 import {
-  BeforeInsert,
-  BeforeSoftRemove,
-  BeforeUpdate,
   Column,
   CreateDateColumn,
   DeleteDateColumn,

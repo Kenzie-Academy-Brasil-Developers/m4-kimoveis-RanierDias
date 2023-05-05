@@ -3,10 +3,10 @@ import { z } from "zod";
 export const realEstateDataPublicSchema = z.object({
   id: z.number(),
   sold: z.boolean(),
-  value: z.number(),
+  value: z.number().or(z.string()),
   size: z.number().int(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
   address: z.number(),
   category: z.number(),
 });
