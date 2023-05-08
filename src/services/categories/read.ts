@@ -1,6 +1,5 @@
-import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
-import { Category, RealEstate } from "../../entities";
+import { Category } from "../../entities";
 import { ICategoryPublic, TService } from "../../interfaces";
 
 export const requestCategoriesList = async (): Promise<ICategoryPublic[]> => {
@@ -10,19 +9,17 @@ export const requestCategoriesList = async (): Promise<ICategoryPublic[]> => {
   return category;
 };
 
-export const requestProprietyListCategory: TService<RealEstate[]> = async (
+export const requestProprietyListCategory: TService<Category> = async (
   payload
 ) => {
   const id = Number(payload.params.id);
-  const realEstateRepo = AppDataSource.getRepository(RealEstate);
+  const realEstateRepo = AppDataSource.getRepository(Category);
   const proprietyList = await realEstateRepo
-    .createQueryBuilder("propriety")
-    .select(
-      "propriety.id, propriety.sold, propriety.value, propriety.size, propriety.createdAt, propriety.updatedAt"
-    )
-    .innerJoinAndSelect("propriety.addressId", "address")
-    .where("categoryId = :proprietyId", { proprietyId: id })
-    .execute();
+    .createQueryBuilder("category")
+    .select()
+    .innerJoinAndSelect("category.realEstate", "propriety")
+    .where("category.id = :categoryId", { categoryId: id })
+    .getMany();
 
-  return proprietyList.raw;
+  return proprietyList[0];
 };

@@ -14,7 +14,7 @@ app.use(express.json());
 app.use("/login", sessionRouter);
 app.use("/users", userRouter);
 app.use("/categories", categorieRouter);
-app.use("/realEstate", proprietyRouter)
+app.use("/realEstate", proprietyRouter);
 
 app.use(handleError);
 

@@ -27,10 +27,10 @@ class RealEstate {
   @Column({ type: "integer" })
   size: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({type: "date"})
   createdAt: string;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({type: "date"})
   updatedAt: string;
 
   @OneToMany(() => Schedule, (schedule) => schedule.realEstate)

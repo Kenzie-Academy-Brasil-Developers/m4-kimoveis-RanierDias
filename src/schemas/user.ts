@@ -4,10 +4,10 @@ export const userDataPublicSchema = z.object({
   id: z.number(),
   name: z.string().max(45),
   email: z.string().email().max(45),
-  admin: z.boolean().optional().default(false),
-  createdAt: z.date(),
-  updatedAt: z.date(),
-  deletedAt: z.string().datetime().nullish(),
+  admin: z.boolean().default(false).optional(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  deletedAt: z.string().nullish(),
 });
 
 export const userDataRegisterSchema = userDataPublicSchema

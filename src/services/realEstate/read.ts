@@ -6,7 +6,6 @@ const requestProprietyList = async (): Promise<RealEstate[]> => {
   const propriety = await realEstateRepo
     .createQueryBuilder("propriety")
     .leftJoinAndSelect("propriety.address", "address")
-    .leftJoinAndSelect("propriety.category", "category")
     .getMany();
 
   return propriety;
