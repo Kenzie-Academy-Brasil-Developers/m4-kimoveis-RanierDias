@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { verifyTokenUser } from "../middlewares/user";
+import { verifyUserAdmin } from "../middlewares/user";
 import { createPropriety, getPorprietyList } from "../controllers/realEstate";
 
 const proprietyRouter = Router();
 
-proprietyRouter.post("", verifyTokenUser, createPropriety);
+proprietyRouter.post("", verifyUserAdmin, createPropriety);
 proprietyRouter.get("", getPorprietyList);
 
 export default proprietyRouter;

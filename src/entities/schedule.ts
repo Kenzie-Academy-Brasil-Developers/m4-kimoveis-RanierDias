@@ -17,7 +17,7 @@ class Schedule {
   date: string;
 
   @Column({ type: "time" })
-  time: string;
+  hour: string;
 
   @ManyToOne(() => User)
   user: User;

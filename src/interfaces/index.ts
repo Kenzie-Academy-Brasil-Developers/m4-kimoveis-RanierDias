@@ -15,6 +15,7 @@ import {
   realEstateDataRegisterSchema,
 } from "../schemas/realEstate";
 import { addressDataPublicSchema } from "../schemas/address";
+import { scheduleDataRegisterSchema } from "../schemas/schedule";
 
 export interface IUserPublic extends z.infer<typeof userDataPublicSchema> {}
 export interface IUserPrivate extends z.infer<typeof userDataPrivateSchema> {}
@@ -33,6 +34,9 @@ export interface IRealEstateRegister
 
 export interface IAddressPublic
   extends z.infer<typeof addressDataPublicSchema> {}
+
+export interface IScheduleRegister
+  extends z.infer<typeof scheduleDataRegisterSchema> {}
 
 export interface ITokenInfo {
   admin: boolean;

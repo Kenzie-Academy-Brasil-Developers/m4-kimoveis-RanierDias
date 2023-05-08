@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { verifyTokenUser } from "../middlewares/user";
+import { verifyUserAdmin } from "../middlewares/user";
 import {
   createCategorie,
   getCategoriesList,
@@ -12,7 +12,7 @@ const categorieRouter = Router();
 categorieRouter.post(
   "",
   verifyCategoryExists,
-  verifyTokenUser,
+  verifyUserAdmin,
   createCategorie
 );
 categorieRouter.get("", getCategoriesList);

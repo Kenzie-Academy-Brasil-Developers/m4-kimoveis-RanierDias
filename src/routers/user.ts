@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   verifyEmailExists,
   verifyTokenUser,
+  verifyUserAdmin,
   verifyUserExists,
 } from "../middlewares/user";
 import {
@@ -14,7 +15,7 @@ import {
 const userRouter = Router();
 
 userRouter.post("", verifyEmailExists, createUser);
-userRouter.get("", verifyTokenUser, getUsersList);
+userRouter.get("", verifyUserAdmin, getUsersList);
 userRouter.patch(
   "/:id",
   verifyUserExists,
@@ -22,6 +23,6 @@ userRouter.patch(
   verifyEmailExists,
   updateUser
 );
-userRouter.delete("/:id", verifyUserExists, verifyTokenUser, deleteUser);
+userRouter.delete("/:id", verifyUserExists, verifyUserAdmin, deleteUser);
 
 export default userRouter;
