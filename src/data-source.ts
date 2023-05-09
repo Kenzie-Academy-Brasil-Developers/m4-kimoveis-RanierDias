@@ -22,7 +22,10 @@ const settings = (): DataSourceOptions => {
 
   return {
     type: "postgres",
-    url: dbUrl,
+    // url: dbUrl,
+    username: "PANDORA",
+    password: "AuroraMaior#Resplandecente072",
+    database: "kimovies",
     synchronize: false,
     logging: true,
     entities: [entitiesPath],
