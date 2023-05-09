@@ -2,15 +2,16 @@ import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
 import * as crypt from "bcryptjs";
 import { userDataPublicSchema } from "../../schemas/user";
-import { IUserPublic } from "../../interfaces";
+import { IUserPrivate, IUserPublic } from "../../interfaces";
 
 const requestUpdateUser = async (
-  payload: any,
+  payload: IUserPrivate,
   userFound: User
 ): Promise<IUserPublic> => {
   const { password } = payload;
   const userRepo = AppDataSource.getRepository(User);
-  const user = userRepo.create({ ...userFound, ...payload });
+  const userData = { ...userFound, ...payload } as User;
+  const user = userRepo.create(userData);
 
   if (password) {
     const passHash = crypt.hashSync(password, 12);

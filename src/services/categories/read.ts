@@ -1,3 +1,4 @@
+import { Request } from "express";
 import { AppDataSource } from "../../data-source";
 import { Category } from "../../entities";
 import { ICategoryPublic, TService } from "../../interfaces";
@@ -10,7 +11,7 @@ export const requestCategoriesList = async (): Promise<ICategoryPublic[]> => {
 };
 
 export const requestProprietyListCategory: TService<Category> = async (
-  payload
+  payload: Request
 ) => {
   const id = Number(payload.params.id);
   const realEstateRepo = AppDataSource.getRepository(Category);
@@ -19,7 +20,7 @@ export const requestProprietyListCategory: TService<Category> = async (
     .select()
     .innerJoinAndSelect("category.realEstate", "propriety")
     .where("category.id = :categoryId", { categoryId: id })
-    .getMany();
+    .getOne();
 
-  return proprietyList[0];
+  return proprietyList!;
 };

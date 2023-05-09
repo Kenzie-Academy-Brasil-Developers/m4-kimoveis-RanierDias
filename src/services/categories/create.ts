@@ -1,9 +1,11 @@
 import { AppDataSource } from "../../data-source";
 import { Category } from "../../entities";
-import { ICategoryPublic, TService } from "../../interfaces";
+import { ICategoryPublic, ICategoryRegister, TService } from "../../interfaces";
 import { categoryDataPublicSchema } from "../../schemas/categories";
 
-const requestCreateCategorie: TService<ICategoryPublic> = async (payload) => {
+const requestCreateCategorie: TService<ICategoryPublic> = async (
+  payload: ICategoryRegister
+) => {
   const categoryRepo = AppDataSource.getRepository(Category);
   const categorie = categoryRepo.create(payload);
 

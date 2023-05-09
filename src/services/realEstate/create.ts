@@ -1,15 +1,27 @@
 import { AppDataSource } from "../../data-source";
-import { Address, RealEstate } from "../../entities";
-import { IRealEstatePublic, TService } from "../../interfaces";
+import { Address, Category, RealEstate } from "../../entities";
+import {
+  IRealEstatePublic,
+  IRealEstateRegister,
+  TService,
+} from "../../interfaces";
 import { realEstateDataPublicSchema } from "../../schemas/realEstate";
 import { addressDataPublicSchema } from "../../schemas/address";
 import AppError from "../../error";
 
-const requestCreatePropriety: TService<IRealEstatePublic> = async (payload) => {
+const requestCreatePropriety: TService<IRealEstatePublic> = async (
+  payload: IRealEstateRegister
+) => {
   const { address: addressPropriety } = payload;
   const addressRepo = AppDataSource.getRepository(Address);
   const realEstateRepo = AppDataSource.getRepository(RealEstate);
+  const categoryRepo = AppDataSource.getRepository(Category);
   const address = addressRepo.create(addressPropriety);
+  const category = await categoryRepo.findOneBy({
+    id: payload.categoryId,
+  });
+
+  if (!category) throw new AppError("Category not exists", 404);
 
   const addressExists = await addressRepo
     .createQueryBuilder("address")
@@ -21,15 +33,8 @@ const requestCreatePropriety: TService<IRealEstatePublic> = async (payload) => {
 
   await addressRepo.save(address);
 
-  const category = payload.categoryId;
-  delete payload.categoryId;
-
   const newAddress = addressDataPublicSchema.parse(address);
-  const newPropriety = { ...payload, address: newAddress.id, category };
-
-  const propriety = realEstateRepo.create(
-    newPropriety
-  ) as unknown as RealEstate;
+  const propriety = realEstateRepo.create({ ...payload, category, address });
 
   await realEstateRepo.save(propriety);
   const proprietyInfo = await realEstateRepo

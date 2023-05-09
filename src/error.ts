@@ -16,7 +16,6 @@ export const handleError = (
   res: Response,
   next: NextFunction
 ) => {
-  // console.log({ error });
   error instanceof AppError
     ? res.status(error.statusCode).json({ message: error.message })
     : error instanceof ZodError

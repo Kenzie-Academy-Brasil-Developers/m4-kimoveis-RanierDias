@@ -1,10 +1,12 @@
 import { AppDataSource } from "../../data-source";
 import * as crypt from "bcryptjs";
 import { User } from "../../entities";
-import { IUserPublic, TService } from "../../interfaces";
+import { IUserPublic, IUserRegister, TService } from "../../interfaces";
 import { userDataPublicSchema } from "../../schemas/user";
 
-const requestCreateUser: TService<IUserPublic> = async (payload) => {
+const requestCreateUser: TService<IUserPublic> = async (
+  payload: IUserRegister
+) => {
   const { password } = payload;
   const passHash = crypt.hashSync(password, 12);
   const dataUser = { ...payload, password: passHash };

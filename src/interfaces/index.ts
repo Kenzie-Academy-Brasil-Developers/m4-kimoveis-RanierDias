@@ -16,6 +16,8 @@ import {
 } from "../schemas/realEstate";
 import { addressDataPublicSchema } from "../schemas/address";
 import { scheduleDataRegisterSchema } from "../schemas/schedule";
+import { User } from "../entities";
+import { DeepPartial } from "typeorm";
 
 export interface IUserPublic extends z.infer<typeof userDataPublicSchema> {}
 export interface IUserPrivate extends z.infer<typeof userDataPrivateSchema> {}
@@ -24,7 +26,7 @@ export interface IUserLog extends z.infer<typeof userDataLogSchema> {}
 
 export interface ICategoryPublic
   extends z.infer<typeof categoryDataPublicSchema> {}
-export interface ICategoryRegiste
+export interface ICategoryRegister
   extends z.infer<typeof categoryDataRegisterSchema> {}
 
 export interface IRealEstatePublic

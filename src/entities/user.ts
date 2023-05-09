@@ -1,16 +1,25 @@
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import Schedule from "./schedule";
+import * as crypt from "bcryptjs";
 
 @Entity("users")
 class User {
+  @BeforeInsert()
+  verifyPass() {
+    const verifyPassHash = crypt.getRounds(this.password);
+
+    if (!verifyPassHash) {
+      this.password = crypt.hashSync(this.password, 12);
+    }
+  }
+
   @PrimaryGeneratedColumn("increment")
   id: number;
 
@@ -33,10 +42,7 @@ class User {
   updatedAt: string;
 
   @DeleteDateColumn({ type: "date", nullable: true })
-  deletedAt: string;
-
-  @OneToMany(() => Schedule, (schedule) => schedule.user)
-  schedules: Schedule[];
+  deletedAt: string | null | undefined;
 }
 
 export default User;

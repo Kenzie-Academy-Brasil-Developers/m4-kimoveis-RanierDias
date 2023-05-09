@@ -1,14 +1,13 @@
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
 import { IUserPublic } from "../../interfaces";
-import { userDataPublicSchema } from "../../schemas/user";
+import { userListPublicSchema } from "../../schemas/user";
 
 const requesGetUsersList = async (): Promise<IUserPublic[]> => {
   const userRepo = AppDataSource.getRepository(User);
+  const usersList = await userRepo.find();
 
-  const usersList2 = (await userRepo.find()).map(user => userDataPublicSchema.parse(user)); //rever essa parte
-
-  return usersList2;
+  return userListPublicSchema.parse(usersList);
 };
 
 export default requesGetUsersList;

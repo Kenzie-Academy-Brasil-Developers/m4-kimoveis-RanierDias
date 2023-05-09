@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   Timestamp,
@@ -20,9 +21,11 @@ class Schedule {
   hour: string;
 
   @ManyToOne(() => User)
+  @JoinColumn()
   user: User;
 
   @ManyToOne(() => RealEstate)
+  @JoinColumn()
   realEstate: RealEstate;
 }
 
