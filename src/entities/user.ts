@@ -1,5 +1,6 @@
 import {
   BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
@@ -18,6 +19,11 @@ class User {
     if (!verifyPassHash) {
       this.password = crypt.hashSync(this.password, 12);
     }
+  }
+
+  @BeforeUpdate()
+  hashPassUser() {
+    this.password = crypt.hashSync(this.password, 12);
   }
 
   @PrimaryGeneratedColumn("increment")

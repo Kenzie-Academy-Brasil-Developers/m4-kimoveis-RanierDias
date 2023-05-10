@@ -1,16 +1,15 @@
 import { Router } from "express";
 import {
   verifyEmailExists,
-  verifyTokenUser,
-  verifyUserAdmin,
   verifyUserExists,
-} from "../middlewares/user";
+} from "../middlewares/verify";
 import {
   createUser,
   deleteUser,
   getUsersList,
   updateUser,
 } from "../controllers/user";
+import { verifyTokenUser, verifyUserAdmin } from "../middlewares/validation";
 
 const userRouter = Router();
 

@@ -1,5 +1,5 @@
 import supertest from 'supertest';
-import { DataSource } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import app from '../../../app';
 import { AppDataSource } from '../../../data-source';
 import { User } from '../../../entities';
@@ -9,7 +9,7 @@ describe('POST /login', () => {
   let connection: DataSource;
 
   const baseUrl: string = '/login';
-  const userRepo = AppDataSource.getRepository(User);
+  const userRepo: Repository<User> = AppDataSource.getRepository(User);
 
   beforeAll(async () => {
     await AppDataSource.initialize()
