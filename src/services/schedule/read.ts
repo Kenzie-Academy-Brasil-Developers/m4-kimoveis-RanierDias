@@ -1,12 +1,14 @@
+import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { RealEstate } from "../../entities";
 import AppError from "../../error";
 import { TService } from "../../interfaces";
 
-const requestGetProprietyListSchedule: TService<RealEstate | null> = async (
+const requestGetProprietyListSchedule: TService<RealEstate, number> = async (
   payload
 ) => {
-  const realEstateRepo = AppDataSource.getRepository(RealEstate);
+  const realEstateRepo: Repository<RealEstate> =
+    AppDataSource.getRepository(RealEstate);
   const realEstate = await realEstateRepo
     .createQueryBuilder("propriety")
     .leftJoinAndSelect("propriety.schedules", "schedule")

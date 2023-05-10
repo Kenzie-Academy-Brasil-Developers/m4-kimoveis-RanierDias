@@ -5,10 +5,11 @@ import { IUserLog, TService } from "../../interfaces";
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
 import AppError from "../../error";
+import { Repository } from "typeorm";
 
-const requestLogUser: TService<string> = async (payload: IUserLog) => {
+const requestLogUser: TService<string, IUserLog> = async (payload) => {
   const { email, password } = payload;
-  const userRepo = AppDataSource.getRepository(User);
+  const userRepo: Repository<User> = AppDataSource.getRepository(User);
   const user = await userRepo.findOneBy({ email });
 
   if (!user) throw new AppError("Invalid credentials", 401);

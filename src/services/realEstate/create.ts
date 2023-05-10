@@ -8,14 +8,18 @@ import {
 import { realEstateDataPublicSchema } from "../../schemas/realEstate";
 import { addressDataPublicSchema } from "../../schemas/address";
 import AppError from "../../error";
+import { Repository } from "typeorm";
 
-const requestCreatePropriety: TService<IRealEstatePublic> = async (
-  payload: IRealEstateRegister
-) => {
+const requestCreatePropriety: TService<
+  IRealEstatePublic,
+  IRealEstateRegister
+> = async (payload) => {
   const { address: addressPropriety } = payload;
-  const addressRepo = AppDataSource.getRepository(Address);
-  const realEstateRepo = AppDataSource.getRepository(RealEstate);
-  const categoryRepo = AppDataSource.getRepository(Category);
+  const addressRepo: Repository<Address> = AppDataSource.getRepository(Address);
+  const realEstateRepo: Repository<RealEstate> =
+    AppDataSource.getRepository(RealEstate);
+  const categoryRepo: Repository<Category> =
+    AppDataSource.getRepository(Category);
   const address = addressRepo.create(addressPropriety);
   const category = await categoryRepo.findOneBy({
     id: payload.categoryId,

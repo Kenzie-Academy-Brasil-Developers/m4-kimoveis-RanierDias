@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { verifyUserAdmin } from "../middlewares/user";
+import { verifyUserAdmin } from "../middlewares/validation";
 import { createPropriety, getPorprietyList } from "../controllers/realEstate";
 
 const proprietyRouter = Router();

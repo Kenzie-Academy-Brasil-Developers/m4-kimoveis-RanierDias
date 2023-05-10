@@ -1,5 +1,5 @@
 import supertest from 'supertest';
-import { DataSource } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import app from '../../../app';
 import { AppDataSource } from '../../../data-source';
 import { Category } from '../../../entities';
@@ -9,7 +9,7 @@ describe('POST /categories', () => {
   let connection: DataSource;
 
   const baseUrl: string = '/categories';
-  const categoryRepo = AppDataSource.getRepository(Category);
+  const categoryRepo: Repository<Category> = AppDataSource.getRepository(Category);
 
   const adminToken: string = tokenMock.genToken(true, 1);
   const userToken: string = tokenMock.genToken(false, 2);

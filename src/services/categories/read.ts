@@ -2,19 +2,23 @@ import { Request } from "express";
 import { AppDataSource } from "../../data-source";
 import { Category } from "../../entities";
 import { ICategoryPublic, TService } from "../../interfaces";
+import { Repository } from "typeorm";
+import AppError from "../../error";
 
 export const requestCategoriesList = async (): Promise<ICategoryPublic[]> => {
-  const categoryRepo = AppDataSource.getRepository(Category);
+  const categoryRepo: Repository<Category> =
+    AppDataSource.getRepository(Category);
   const category = await categoryRepo.find();
 
   return category;
 };
 
-export const requestProprietyListCategory: TService<Category> = async (
-  payload: Request
+export const requestProprietyListCategory: TService<Category, Request> = async (
+  payload
 ) => {
   const id = Number(payload.params.id);
-  const realEstateRepo = AppDataSource.getRepository(Category);
+  const realEstateRepo: Repository<Category> =
+    AppDataSource.getRepository(Category);
   const proprietyList = await realEstateRepo
     .createQueryBuilder("category")
     .select()
@@ -22,5 +26,7 @@ export const requestProprietyListCategory: TService<Category> = async (
     .where("category.id = :categoryId", { categoryId: id })
     .getOne();
 
-  return proprietyList!;
+  if (!proprietyList) throw new AppError("Category not found", 404);
+
+  return proprietyList;
 };

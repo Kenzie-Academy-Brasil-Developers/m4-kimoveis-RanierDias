@@ -1,3 +1,5 @@
+import { Repository } from "typeorm";
+
 import { AppDataSource } from "../../data-source";
 import { RealEstate, Schedule, User } from "../../entities";
 import AppError from "../../error";
@@ -7,9 +9,11 @@ const requestCreateSchedule = async (
   payload: IScheduleRegister,
   userId: number
 ): Promise<{ message: string }> => {
-  const userRepo = AppDataSource.getRepository(User);
-  const realEstateRepo = AppDataSource.getRepository(RealEstate);
-  const scheduleRepo = AppDataSource.getRepository(Schedule);
+  const userRepo: Repository<User> = AppDataSource.getRepository(User);
+  const realEstateRepo: Repository<RealEstate> =
+    AppDataSource.getRepository(RealEstate);
+  const scheduleRepo: Repository<Schedule> =
+    AppDataSource.getRepository(Schedule);
 
   const timeReserved: string = payload.hour.split(":")[0];
 

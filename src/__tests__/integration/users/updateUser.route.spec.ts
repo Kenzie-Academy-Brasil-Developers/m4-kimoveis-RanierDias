@@ -1,5 +1,5 @@
 import supertest from 'supertest';
-import { DataSource } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import app from '../../../app';
 import { AppDataSource } from '../../../data-source';
 import { User } from '../../../entities';
@@ -13,7 +13,7 @@ describe('PATCH /users', () => {
   const baseUrl: string = '/users';
   const updateInvalidIDUrl: string = baseUrl + '/123456';
 
-  const userRepo = AppDataSource.getRepository(User);
+  const userRepo: Repository<User> = AppDataSource.getRepository(User);
   let userAdmin: User;
   let userNotAdmin: User;
 

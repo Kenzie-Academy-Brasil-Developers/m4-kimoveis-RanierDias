@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { verifyTokenUser, verifyUserAdmin } from "../middlewares/user";
+import { verifyTokenUser, verifyUserAdmin } from "../middlewares/validation";
 import {
   createSchedule,
   getProprietyListSchedule,
