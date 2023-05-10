@@ -11,6 +11,7 @@ import {
 } from "../controllers/user";
 import { verifyTokenUser, verifyUserAdmin } from "../middlewares/validation";
 
+
 const userRouter = Router();
 
 userRouter.post("", verifyEmailExists, createUser);

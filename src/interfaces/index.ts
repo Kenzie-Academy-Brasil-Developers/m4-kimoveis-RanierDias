@@ -55,3 +55,4 @@ export type TMiddleware<T> = (
 export type TController = (req: Request, res: Response) => Promise<Response>;
 
 export type TService<T, P> = (payload: P) => Promise<T>;
+

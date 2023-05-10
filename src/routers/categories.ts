@@ -7,6 +7,7 @@ import {
 } from "../controllers/categories";
 import { verifyCategoryExists } from "../middlewares/verify";
 
+
 const categorieRouter = Router();
 
 categorieRouter.post(
