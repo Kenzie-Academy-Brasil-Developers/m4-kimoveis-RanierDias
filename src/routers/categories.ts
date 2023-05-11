@@ -8,6 +8,7 @@ import {
 import { verifyCategoryExists, verifyDataBody } from "../middlewares/verify";
 import { categoryDataRegisterSchema } from "../schemas/categories";
 
+
 const categorieRouter = Router();
 
 categorieRouter.post(

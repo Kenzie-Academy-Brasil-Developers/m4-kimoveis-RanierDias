@@ -13,6 +13,7 @@ import {
 import { verifyTokenUser, verifyUserAdmin } from "../middlewares/validation";
 import { userDataPrivateSchema, userDataRegisterSchema } from "../schemas/user";
 
+
 const userRouter = Router();
 
 userRouter.post(
