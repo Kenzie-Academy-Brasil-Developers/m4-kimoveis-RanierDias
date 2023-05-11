@@ -40,6 +40,8 @@ export interface IAddressPublic
 export interface IScheduleRegister
   extends z.infer<typeof scheduleDataRegisterSchema> {}
 
+export interface IUserLog extends z.infer<typeof userDataLogSchema> {}
+
 export interface ITokenInfo {
   admin: boolean;
   sub: string;

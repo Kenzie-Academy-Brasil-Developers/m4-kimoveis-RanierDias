@@ -1,6 +1,11 @@
 import { User } from "../entities";
 import AppError from "../error";
-import { TController } from "../interfaces";
+import {
+  IUserLog,
+  IUserPrivate,
+  IUserRegister,
+  TController,
+} from "../interfaces";
 import {
   userDataLogSchema,
   userDataPrivateSchema,
@@ -13,7 +18,7 @@ import requesGetUsersList from "../services/user/read";
 import requestUpdateUser from "../services/user/update";
 
 export const createUser: TController = async (req, res) => {
-  const payload = userDataRegisterSchema.parse(req.body);
+  const payload: IUserRegister = res.locals.data;
   const user = await requestCreateUser(payload);
 
   return res.status(201).json(user);
@@ -26,7 +31,7 @@ export const getUsersList: TController = async (req, res) => {
 };
 
 export const updateUser: TController = async (req, res) => {
-  const payload = userDataPrivateSchema.parse(req.body);
+  const payload: IUserPrivate = res.locals.data;
   const userFound: User = res.locals.user;
   const user = await requestUpdateUser(payload, userFound);
 
@@ -42,7 +47,7 @@ export const deleteUser: TController = async (req, res) => {
 };
 
 export const sessionLogUser: TController = async (req, res) => {
-  const payload = userDataLogSchema.parse(req.body);
+  const payload: IUserLog = res.locals.data;
   const token = await requestLogUser(payload);
 
   return res.status(200).json({ token });

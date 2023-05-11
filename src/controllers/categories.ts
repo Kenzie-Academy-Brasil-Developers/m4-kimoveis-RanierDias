@@ -1,4 +1,4 @@
-import { TController } from "../interfaces";
+import { ICategoryPublic, TController } from "../interfaces";
 import { categoryDataRegisterSchema } from "../schemas/categories";
 import requestCreateCategorie from "../services/categories/create";
 import {
@@ -7,14 +7,14 @@ import {
 } from "../services/categories/read";
 
 export const createCategorie: TController = async (req, res) => {
-  const payload = categoryDataRegisterSchema.parse(req.body);
+  const payload: ICategoryPublic = res.locals.data
   const categorie = await requestCreateCategorie(payload);
 
   return res.status(201).json(categorie);
 };
 
 export const getCategoriesList: TController = async (req, res) => {
-  const categoriesList = await requestCategoriesList();
+  const categoriesList: ICategoryPublic[] = await requestCategoriesList();
 
   return res.status(200).json(categoriesList);
 };
