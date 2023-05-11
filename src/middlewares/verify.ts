@@ -5,6 +5,9 @@ import AppError from "../error";
 import * as jwt from "jsonwebtoken";
 import { TMiddleware } from "../interfaces";
 import { Repository } from "typeorm";
+import { NextFunction, Request, Response } from "express";
+import { ZodTypeAny } from "zod";
+
 
 export const verifyEmailExists: TMiddleware<void> = async (req, res, next) => {
   const { email } = req.body;
@@ -47,3 +50,11 @@ export const verifyCategoryExists: TMiddleware<void> = async (
 
   return next();
 };
+
+export const verifyDataBody =
+  (schema: ZodTypeAny) => (req: Request, res: Response, next: NextFunction) => {
+    const payload = schema.parse(req.body);
+    res.locals.data = payload;
+
+    return next();
+  };

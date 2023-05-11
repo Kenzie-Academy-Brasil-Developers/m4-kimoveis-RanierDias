@@ -4,7 +4,7 @@ import requestCreateSchedule from "../services/schedule/create";
 import requestGetProprietyListSchedule from "../services/schedule/read";
 
 export const createSchedule: TController = async (req, res) => {
-  const payload = scheduleDataRegisterSchema.parse(req.body);
+  const payload: IScheduleRegister = res.locals.data;
   const userId = Number(res.locals.userId);
   const schedule = await requestCreateSchedule(payload, userId);
 

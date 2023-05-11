@@ -13,6 +13,7 @@ import * as crypt from "bcryptjs";
 @Entity("users")
 class User {
   @BeforeInsert()
+  @BeforeUpdate()
   verifyPass() {
     const verifyPassHash = crypt.getRounds(this.password);
 
