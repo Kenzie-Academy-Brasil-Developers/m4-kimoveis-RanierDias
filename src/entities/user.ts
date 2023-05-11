@@ -22,6 +22,12 @@ class User {
     }
   }
 
+  @BeforeUpdate()
+  hashPassUser() {
+    this.password = crypt.hashSync(this.password, 12);
+  }
+
+
   @PrimaryGeneratedColumn("increment")
   id: number;
 

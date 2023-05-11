@@ -8,6 +8,7 @@ import { Repository } from "typeorm";
 import { NextFunction, Request, Response } from "express";
 import { ZodTypeAny } from "zod";
 
+
 export const verifyEmailExists: TMiddleware<void> = async (req, res, next) => {
   const { email } = req.body;
 
