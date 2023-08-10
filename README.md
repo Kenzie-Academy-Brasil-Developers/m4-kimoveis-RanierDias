@@ -29,11 +29,11 @@ Uma API Rest que oferece recursos abrangentes para o controle de imobiliárias. 
 -   Rota para criação de usuário com os seguintes dados:
     -   **name**: string, máximo de 45 caracteres e obrigatório;
     -   **email**: string, máximo de 45 caracteres, obrigatório e único;
-    -   **password**: string, máximo de 120 caracteres, obrigatório;
+    -   **password**: string, máximo de 120 caracteres e obrigatório;
 
 ### GET - /users
 
--   A rota deve retornar todos os dados dos usuários;
+-   A rota retorna todos os dados dos usuários;
 -   A rota pode ser acessada apenas por usuários administradores.
 
 ### PATCH - /users/:id
